@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### `yarn install`
+
+Do yarn install to add all the required external packages
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -68,3 +72,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Steps to start Project
+
+1. yarn install
+2. yarn start
+   Runs the app in the development mode.\
+   Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### functions which I was not able to complete
+
+1. Search by Ability
+2. Sort by Weight and Height
+
+Rest all functionaltiy is working.
