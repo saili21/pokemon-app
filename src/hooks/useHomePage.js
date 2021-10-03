@@ -3,9 +3,12 @@ import { useState } from "react";
 import { cloneDeep } from "lodash";
 export const useHomePage = () => {
   const [pokemonList, setPokemonList] = useState(null);
+  const [filteredPokemonList, setFilteredPokemonList] = useState(null);
+
   const [pokemonDetails, setPokemonDetails] = useState(null);
   const [numberOfCards, setNumberOfCards] = useState(null);
   const [sortBy, setSortBy] = useState(null);
+  const [searchText, setSearchText] = useState("");
 
   const getPokemonList = (limit = 20) => {
     axios
@@ -14,6 +17,12 @@ export const useHomePage = () => {
         console.log("Pokemon List:", response.data);
         if (response.status === 200) {
           setPokemonList(response.data);
+          setFilteredPokemonList(response.data);
+
+          if (localStorage.getItem("searchText")) {
+            setSearchText(localStorage.getItem("searchText"));
+            searchPokemons(localStorage.getItem("searchText"), response.data);
+          }
         }
       })
       .catch(function (error) {
@@ -79,22 +88,24 @@ export const useHomePage = () => {
       });
   };
 
-  const searchPokemons = (event) => {
-    let _pokemonList = cloneDeep(pokemonList);
+  const searchPokemons = (text, list) => {
+    localStorage.setItem("searchText", text);
+    setSearchText(text);
+    let _pokemonList = cloneDeep(list);
 
-    if (event.target.value) {
-      let searchedPokemonList = pokemonList.results.filter((ele) =>
-        ele.name.includes(event.target.value)
+    if (text) {
+      let searchedPokemonList = list.results.filter((ele) =>
+        ele.name.includes(text)
       );
       _pokemonList.results = searchedPokemonList;
-      setPokemonList(_pokemonList);
+      setFilteredPokemonList(_pokemonList);
     } else {
       numberOfCards ? getPokemonList(numberOfCards) : getPokemonList();
     }
   };
 
   const sortPokemonBy = () => {
-    let _pokemonList = cloneDeep(pokemonList);
+    let _pokemonList = cloneDeep(filteredPokemonList);
 
     _pokemonList.results.sort((a, b) => {
       if (a.name < b.name) {
@@ -106,7 +117,7 @@ export const useHomePage = () => {
       return 0;
     });
 
-    setPokemonList(_pokemonList);
+    setFilteredPokemonList(_pokemonList);
   };
 
   return {
@@ -122,5 +133,8 @@ export const useHomePage = () => {
     setSortBy,
     searchPokemons,
     sortPokemonBy,
+    searchText,
+    filteredPokemonList,
+    setFilteredPokemonList,
   };
 };

@@ -24,6 +24,8 @@ export default function HomePage() {
     setSortBy,
     searchPokemons,
     sortPokemonBy,
+    searchText,
+    filteredPokemonList,
   } = useHomePage();
   useEffect(() => {
     getPokemonList();
@@ -50,7 +52,7 @@ export default function HomePage() {
         <Typography variant="h5">Pokemon List</Typography>
       </Grid>
 
-      {pokemonList && pokemonList.results.length ? (
+      {filteredPokemonList && filteredPokemonList.results.length ? (
         <Grid
           container
           spacing={2}
@@ -59,7 +61,10 @@ export default function HomePage() {
           <Grid container item xs={12} spacing={3}>
             <Grid container item xs={3}>
               <TextField
-                onChange={searchPokemons}
+                onChange={(event) =>
+                  searchPokemons(event.target.value, pokemonList)
+                }
+                value={searchText}
                 label="Search by name and abilities"
               ></TextField>
             </Grid>
@@ -105,19 +110,21 @@ export default function HomePage() {
             style={{ marginBottom: 20 }}
           >
             <Button
-              disabled={!pokemonList.previous}
-              onClick={() => getPreviousPokemonList(pokemonList.previous)}
+              disabled={!filteredPokemonList.previous}
+              onClick={() =>
+                getPreviousPokemonList(filteredPokemonList.previous)
+              }
             >
               Back
             </Button>
             <Button
-              disabled={!pokemonList.next}
-              onClick={() => getNextPokemonList(pokemonList.next)}
+              disabled={!filteredPokemonList.next}
+              onClick={() => getNextPokemonList(filteredPokemonList.next)}
             >
               Next
             </Button>
           </Grid>
-          {pokemonList.results.map((data) => (
+          {filteredPokemonList.results.map((data) => (
             <Grid key={data.name} item xs={12} md={4} lg={3}>
               <PokemonCard name={data.name} detailsURL={data.url} />
             </Grid>
@@ -129,14 +136,16 @@ export default function HomePage() {
             style={{ marginBottom: 20 }}
           >
             <Button
-              disabled={!pokemonList.previous}
-              onClick={() => getPreviousPokemonList(pokemonList.previous)}
+              disabled={!filteredPokemonList.previous}
+              onClick={() =>
+                getPreviousPokemonList(filteredPokemonList.previous)
+              }
             >
               Back
             </Button>
             <Button
-              disabled={!pokemonList.next}
-              onClick={() => getNextPokemonList(pokemonList.next)}
+              disabled={!filteredPokemonList.next}
+              onClick={() => getNextPokemonList(filteredPokemonList.next)}
             >
               Next
             </Button>
