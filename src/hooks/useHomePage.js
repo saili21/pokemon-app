@@ -41,6 +41,7 @@ export const useHomePage = () => {
         console.log("Pokemon List:", response.data);
         if (response.status === 200) {
           setPokemonList(response.data);
+          setFilteredPokemonList(response.data);
         }
       })
       .catch(function (error) {
@@ -59,6 +60,7 @@ export const useHomePage = () => {
         console.log("Pokemon List:", response.data);
         if (response.status === 200) {
           setPokemonList(response.data);
+          setFilteredPokemonList(response.data);
         }
       })
       .catch(function (error) {
