@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { useHomePage } from "../hooks/useHomePage";
 import PokemonAbilities from "./PokemonAbilities";
 

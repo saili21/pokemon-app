@@ -23,6 +23,42 @@ export const useHomePage = () => {
       });
   };
 
+  const getNextPokemonList = (url) => {
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log("Pokemon List:", response.data);
+        if (response.status === 200) {
+          setPokemonList(response.data);
+        }
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  };
+
+  const getPreviousPokemonList = (url) => {
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log("Pokemon List:", response.data);
+        if (response.status === 200) {
+          setPokemonList(response.data);
+        }
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  };
+
   const getPokemonDetails = (url) => {
     axios
       .get(url)
@@ -44,6 +80,8 @@ export const useHomePage = () => {
   return {
     getPokemonList,
     getPokemonDetails,
+    getPreviousPokemonList,
+    getNextPokemonList,
     pokemonList,
     pokemonDetails,
   };
