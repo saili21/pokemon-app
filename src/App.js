@@ -1,14 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
+import AppRouter from "./AppRouter";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h3>Create Pokemon App</h3>
-      </header>
-    </div>
-  );
+  return <AppRouter />;
 }
 
 export default App;
